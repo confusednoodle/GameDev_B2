@@ -18,9 +18,13 @@ public class Flying : MonoBehaviour
     [SerializeField] SpriteRenderer playerSprite;
     [SerializeField] Rigidbody2D playerRigidbody;
 
+    [SerializeField] AudioSource crashSound;
+    [SerializeField] AudioClip crashSoundClip;
+    public bool crashed = false;
+
     //fuel bar
     float fuelDecrease = 0.015f;
-    public float fuelCurrent = 100f;
+    [SerializeField] FuelBar fuel;
     [SerializeField] AudioSource fuelEmpty;
 
     public void Start()
@@ -33,15 +37,21 @@ public class Flying : MonoBehaviour
         Vector2 pos = playerRigidbody.velocity;
         if (Input.GetKey(KeyCode.Space))
         {
-            fuelCurrent -= fuelDecrease;
-            if (fuelCurrent <= 0)
+            if (crashed)
+            {
+                currentRotation += rotationSpeed * Time.deltaTime;
+                currentRotation = Mathf.Clamp(currentRotation, 0f, maxRotationAngle);
+                transform.rotation = Quaternion.Euler(0f, 0f, -currentRotation);
+            }
+
+            if (fuel.fuelCurrent <= 0)
             {
                 fuelEmpty.Play();
                 currentRotation += rotationSpeed * Time.deltaTime;
                 currentRotation = Mathf.Clamp(currentRotation, 0f, maxRotationAngle);
                 transform.rotation = Quaternion.Euler(0f, 0f, -currentRotation);
             }
-            else
+            else if (fuel.fuelCurrent > 0 && crashed == false)
             {
                 pos.y += speed * Time.deltaTime;
                 if (pos.y > upperLimit)
@@ -63,7 +73,7 @@ public class Flying : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (fuelCurrent > 0)
+            if (fuel.fuelCurrent > 0 && crashed == false)
             {
                 boostSound.loop = true;
                 boostSound.Play();
@@ -86,13 +96,12 @@ public class Flying : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Obstacle")
-        {
-            Debug.Log("Player collided with obstacle!");
-
-        }
+        crashSound.PlayOneShot(crashSoundClip, 5f);
+        this.GetComponent<Animator>().enabled = false;
+        this.GetComponent<Rigidbody2D>().drag -= 5;
+        crashed = true;
     }
 
 }

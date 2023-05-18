@@ -12,17 +12,11 @@ public class FuelBar : MonoBehaviour
     [SerializeField] float fuelDecrease;
     public TextMeshProUGUI fuelText;
     public float fuelCurrent = 100f;
+    [SerializeField] Flying plane;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && plane.crashed == false)
         {
             fuelSprite.fillAmount -= fuelDecrease * 1/100;
             fuelCurrent -= fuelDecrease;
