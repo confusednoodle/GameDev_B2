@@ -8,6 +8,10 @@ public class ItemFuel : MonoBehaviour
 {
     [SerializeField] float rotationSpeed;
     [SerializeField] Image fuelSprite;
+    [SerializeField] FuelBar fuel;
+    public float fuelIncreased;
+    public AudioSource itemCollected;
+    public AudioClip itemCollectedClip;
     public TextMeshProUGUI fuelText;
 
     void Update()
@@ -15,9 +19,25 @@ public class ItemFuel : MonoBehaviour
         transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        //Destroy(this.gameObject);
-        Debug.Log("Hallo");
+        itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
+        fuelSprite.fillAmount += 0.3f;
+        Debug.Log(fuel.fuelCurrent.ToString());
+        fuelIncreased = fuel.fuelCurrent + 30f;
+        Debug.Log(fuelIncreased.ToString());
+        if (fuelIncreased >= 100f)
+        {
+            fuelIncreased = 100f;
+        }
+        fuelText.text = fuelIncreased.ToString("F0");
+        fuel.fuelCurrent = fuelIncreased;
+        StartCoroutine(WaitForDestruction());
+    }
+
+    private IEnumerator WaitForDestruction()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(this.gameObject);
     }
 }
