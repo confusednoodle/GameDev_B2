@@ -20,7 +20,7 @@ public class Flying : MonoBehaviour
 
     //fuel bar
     float fuelDecrease = 0.015f;
-    public float fuelCurrent = 100f;
+    [SerializeField] FuelBar fuel;
     [SerializeField] AudioSource fuelEmpty;
 
     public void Start()
@@ -33,8 +33,7 @@ public class Flying : MonoBehaviour
         Vector2 pos = playerRigidbody.velocity;
         if (Input.GetKey(KeyCode.Space))
         {
-            fuelCurrent -= fuelDecrease;
-            if (fuelCurrent <= 0)
+            if (fuel.fuelCurrent <= 0)
             {
                 fuelEmpty.Play();
                 currentRotation += rotationSpeed * Time.deltaTime;
@@ -63,7 +62,7 @@ public class Flying : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (fuelCurrent > 0)
+            if (fuel.fuelCurrent > 0)
             {
                 boostSound.loop = true;
                 boostSound.Play();

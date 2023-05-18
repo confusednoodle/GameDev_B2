@@ -1912,6 +1912,7 @@ MonoBehaviour:
   playerSprite: {fileID: 1558622610}
   playerRigidbody: {fileID: 1558622609}
   fuelCurrent: 100
+  fuel: {fileID: 1262400153}
   fuelEmpty: {fileID: 1558622616}
 --- !u!82 &1558622614
 AudioSource:
