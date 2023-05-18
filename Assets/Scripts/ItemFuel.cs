@@ -9,6 +9,7 @@ public class ItemFuel : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] Image fuelSprite;
     [SerializeField] FuelBar fuel;
+    [SerializeField] Flying plane;
     public float fuelIncreased;
     public AudioSource itemCollected;
     public AudioClip itemCollectedClip;
@@ -21,18 +22,19 @@ public class ItemFuel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
-        fuelSprite.fillAmount += 0.3f;
-        Debug.Log(fuel.fuelCurrent.ToString());
-        fuelIncreased = fuel.fuelCurrent + 30f;
-        Debug.Log(fuelIncreased.ToString());
-        if (fuelIncreased >= 100f)
-        {
-            fuelIncreased = 100f;
-        }
-        fuelText.text = fuelIncreased.ToString("F0");
-        fuel.fuelCurrent = fuelIncreased;
-        StartCoroutine(WaitForDestruction());
+        //if (plane.crashed == false)
+        //{
+            itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
+            fuelSprite.fillAmount += 0.3f;
+            fuelIncreased = fuel.fuelCurrent + 30f;
+            if (fuelIncreased >= 100f)
+            {
+                fuelIncreased = 100f;
+            }
+            fuelText.text = fuelIncreased.ToString("F0");
+            fuel.fuelCurrent = fuelIncreased;
+            StartCoroutine(WaitForDestruction());
+        //}
     }
 
     private IEnumerator WaitForDestruction()
