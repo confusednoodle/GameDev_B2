@@ -22,8 +22,8 @@ public class ItemFuel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //if (plane.crashed == false)
-        //{
+        if (plane.crashed == false)
+        {
             itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
             fuelSprite.fillAmount += 0.3f;
             fuelIncreased = fuel.fuelCurrent + 30f;
@@ -34,7 +34,7 @@ public class ItemFuel : MonoBehaviour
             fuelText.text = fuelIncreased.ToString("F0");
             fuel.fuelCurrent = fuelIncreased;
             StartCoroutine(WaitForDestruction());
-        //}
+        }
     }
 
     private IEnumerator WaitForDestruction()
