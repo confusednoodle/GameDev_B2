@@ -98,10 +98,13 @@ public class Flying : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        crashSound.PlayOneShot(crashSoundClip, 5f);
-        this.GetComponent<Animator>().enabled = false;
-        this.GetComponent<Rigidbody2D>().drag -= 5;
-        crashed = true;
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            crashSound.PlayOneShot(crashSoundClip, 5f);
+            this.GetComponent<Animator>().enabled = false;
+            this.GetComponent<Rigidbody2D>().drag -= 5;
+            crashed = true;
+        }
     }
 
 }
