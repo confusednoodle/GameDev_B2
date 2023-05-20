@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 156325392}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1332,7 +1332,7 @@ GameObject:
   - component: {fileID: 551549123}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1721,7 +1721,7 @@ GameObject:
   - component: {fileID: 751767184}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2555,6 +2555,7 @@ MonoBehaviour:
   fuelEmpty: {fileID: 1558622616}
   mainCamera: {fileID: 519420031}
   crashText: {fileID: 2103382569}
+  wait: 0
   itemCollected: {fileID: 1558622618}
   itemCollectedClip: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
 --- !u!82 &1558622614

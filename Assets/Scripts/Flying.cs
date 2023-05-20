@@ -105,7 +105,6 @@ public class Flying : MonoBehaviour
             isPlaying = false;
         }
 
-
     }
 
     private IEnumerator WaitForMusic()
@@ -151,6 +150,12 @@ public class Flying : MonoBehaviour
                 StartCoroutine(WaitForRestart());
             }        
         }
+
+        while (collision.gameObject.tag == "Border")
+        {
+            currentRotation = Mathf.Clamp(0f, 0f, maxRotationAngle);
+        }
+
     }
 
     private IEnumerator WaitForRestart()
