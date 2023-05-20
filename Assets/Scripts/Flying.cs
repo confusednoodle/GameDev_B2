@@ -40,14 +40,21 @@ public class Flying : MonoBehaviour
 
     //UI text
     [SerializeField] GameObject crashText;
-    public bool wait = false;
+    private bool wait = false;
 
     //fuel item
     public AudioSource itemCollected;
     public AudioClip itemCollectedClip;
 
+    //border
+    private bool borderCollision = false;
     public void Update()
     {
+        if (Input.GetKey(KeyCode.Space) && crashed == false && borderCollision == true)
+        {
+            currentRotation = Mathf.Clamp(0f, 0f, 0f);
+            borderCollision = false;
+        }
 
         if (crashed == true && Input.GetKey(KeyCode.Space) && wait == false)
         {
@@ -151,9 +158,9 @@ public class Flying : MonoBehaviour
             }        
         }
 
-        while (collision.gameObject.tag == "Border")
+        if (collision.gameObject.tag == "Border")
         {
-            currentRotation = Mathf.Clamp(0f, 0f, maxRotationAngle);
+            borderCollision = true;
         }
 
     }
@@ -165,4 +172,5 @@ public class Flying : MonoBehaviour
         crashText.SetActive(true);
         wait = false;
     }
+
 }

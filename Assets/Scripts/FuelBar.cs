@@ -12,8 +12,6 @@ public class FuelBar : MonoBehaviour
     [SerializeField] float fuelDecrease;
     public TextMeshProUGUI fuelText;
     public float fuelCurrent = 100f;
-    //public AudioSource itemCollected;
-    //public AudioClip itemCollectedClip;
     [SerializeField] Flying plane;
 
     void Update()

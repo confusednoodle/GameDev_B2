@@ -10,8 +10,6 @@ public class ItemFuel : MonoBehaviour
     [SerializeField] Image fuelSprite;
     [SerializeField] FuelBar fuel;
     [SerializeField] Flying plane;
-    //public AudioSource itemCollected;
-    //public AudioClip itemCollectedClip;
     public float fuelIncreased;
     public TextMeshProUGUI fuelText;
 
@@ -24,7 +22,6 @@ public class ItemFuel : MonoBehaviour
     {
         if (plane.crashed == false)
         {
-            //itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
             fuelSprite.fillAmount += 0.3f;
             fuelIncreased = fuel.fuelCurrent + 30f;
             if (fuelIncreased >= 100f)
@@ -34,13 +31,6 @@ public class ItemFuel : MonoBehaviour
             fuelText.text = fuelIncreased.ToString("F0");
             fuel.fuelCurrent = fuelIncreased;
             Destroy(this.gameObject);
-            //StartCoroutine(WaitForDestruction());
         }
     }
-
-    /*private IEnumerator WaitForDestruction()
-    {
-        yield return new WaitForSeconds(0.3f);
-        Destroy(this.gameObject);
-    }*/
 }
