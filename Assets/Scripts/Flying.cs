@@ -40,11 +40,16 @@ public class Flying : MonoBehaviour
 
     //UI text
     [SerializeField] GameObject crashText;
+    public bool wait = false;
+
+    //fuel item
+    public AudioSource itemCollected;
+    public AudioClip itemCollectedClip;
 
     public void Update()
     {
 
-        if (crashed == true && Input.GetKey(KeyCode.Space))
+        if (crashed == true && Input.GetKey(KeyCode.Space) && wait == false)
         {
             SceneManager.LoadScene("SampleScene");
         }
@@ -118,8 +123,13 @@ public class Flying : MonoBehaviour
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<Rigidbody2D>().drag -= 5;
             mainCamera.GetComponent<CameraMovement>().enabled = false;
-            crashText.SetActive(true);
             crashed = true;
+            StartCoroutine(WaitForRestart());
+        }
+
+        if(collision.gameObject.tag == "Item" && crashed == false)
+        {
+            itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
         }
     }
 
@@ -133,13 +143,21 @@ public class Flying : MonoBehaviour
             }
             else
             {
-                crashText.SetActive(true);
                 crashSound.PlayOneShot(crashSoundClip, 5f);
                 this.GetComponent<Animator>().enabled = false;
                 this.GetComponent<Rigidbody2D>().drag -= 5;
                 mainCamera.GetComponent<CameraMovement>().enabled = false;
                 crashed = true;
+                StartCoroutine(WaitForRestart());
             }        
         }
+    }
+
+    private IEnumerator WaitForRestart()
+    {
+        wait = true;
+        yield return new WaitForSeconds(0.5f);
+        crashText.SetActive(true);
+        wait = false;
     }
 }
