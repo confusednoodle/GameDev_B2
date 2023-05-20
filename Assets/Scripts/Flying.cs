@@ -13,9 +13,11 @@ public class Flying : MonoBehaviour
     [SerializeField] float upperLimit;
     public float maxRotationAngle = 45f;
     private float currentRotation = 0f;
+    private float initialRotation = 0f;
 
     [SerializeField] AudioSource bgMusic;
     [SerializeField] AudioSource boostSound;
+    [SerializeField] AudioSource goalSound;
     private bool isPlaying = false;
 
     [SerializeField] SpriteRenderer playerSprite;
@@ -24,6 +26,7 @@ public class Flying : MonoBehaviour
     [SerializeField] AudioSource crashSound;
     [SerializeField] AudioClip crashSoundClip;
     public bool crashed = false;
+    public bool finished = false;
 
     //fuel bar
     float fuelDecrease = 0.015f;
@@ -40,6 +43,7 @@ public class Flying : MonoBehaviour
 
     //UI text
     [SerializeField] GameObject crashText;
+    [SerializeField] GameObject goalText;
     private bool wait = false;
 
     //fuel item
@@ -48,20 +52,21 @@ public class Flying : MonoBehaviour
 
     //border
     private bool borderCollision = false;
+
     public void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && crashed == false && borderCollision == true)
-        {
-            currentRotation = Mathf.Clamp(0f, 0f, 0f);
-            borderCollision = false;
-        }
-
         if (crashed == true && Input.GetKey(KeyCode.Space) && wait == false)
         {
             SceneManager.LoadScene("SampleScene");
         }
+
+        if (finished == true && Input.GetKey(KeyCode.Space) && wait == false)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
         Vector2 pos = playerRigidbody.velocity;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && finished == false)
         {
             if (crashed)
             {
@@ -90,7 +95,7 @@ public class Flying : MonoBehaviour
                 playerRigidbody.velocity = pos;
             }
         }
-        else
+        else if (finished == false)
         {
             currentRotation += rotationSpeed * Time.deltaTime;
             currentRotation = Mathf.Clamp(currentRotation, 0f, maxRotationAngle);
@@ -133,9 +138,18 @@ public class Flying : MonoBehaviour
             StartCoroutine(WaitForRestart());
         }
 
-        if(collision.gameObject.tag == "Item" && crashed == false)
+        if (collision.gameObject.tag == "Item" && crashed == false)
         {
             itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
+        }
+
+        if (collision.gameObject.tag == "Goal" && crashed == false)
+        {
+            finished = true;
+            this.GetComponent<Animator>().enabled = false;
+            transform.rotation = Quaternion.Euler(0f, 0f, initialRotation);
+            goalSound.Play();
+            StartCoroutine(WaitForMenu());
         }
     }
 
@@ -161,6 +175,9 @@ public class Flying : MonoBehaviour
         if (collision.gameObject.tag == "Border")
         {
             borderCollision = true;
+            currentRotation += rotationSpeed * Time.deltaTime;
+            currentRotation = Mathf.Clamp(currentRotation, 0f, maxRotationAngle);
+            transform.rotation = Quaternion.Euler(0f, 0f, -currentRotation);
         }
 
     }
@@ -170,6 +187,14 @@ public class Flying : MonoBehaviour
         wait = true;
         yield return new WaitForSeconds(0.5f);
         crashText.SetActive(true);
+        wait = false;
+    }
+
+    private IEnumerator WaitForMenu()
+    {
+        wait = true;
+        yield return new WaitForSeconds(2f);
+        goalText.SetActive(true);
         wait = false;
     }
 

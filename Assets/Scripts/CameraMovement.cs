@@ -8,8 +8,10 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        // Move the camera to the left
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        if(this.transform.position.x <= 69)
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+        }
     }
     
 }

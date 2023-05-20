@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Ground
   - Border
+  - Goal
   layers:
   - Default
   - TransparentFX
