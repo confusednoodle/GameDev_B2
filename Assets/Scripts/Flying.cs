@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Flying : MonoBehaviour
 {
@@ -27,13 +30,24 @@ public class Flying : MonoBehaviour
     [SerializeField] FuelBar fuel;
     [SerializeField] AudioSource fuelEmpty;
 
+
+    //camera
+    [SerializeField] Camera mainCamera;
     public void Start()
     {
         StartCoroutine(WaitForMusic());
     }
 
+    //UI text
+    [SerializeField] GameObject crashText;
+
     public void Update()
     {
+
+        if (crashed == true && Input.GetKey(KeyCode.Space))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
         Vector2 pos = playerRigidbody.velocity;
         if (Input.GetKey(KeyCode.Space))
         {
@@ -98,13 +112,34 @@ public class Flying : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "Obstacle" && crashed == false)
         {
             crashSound.PlayOneShot(crashSoundClip, 5f);
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<Rigidbody2D>().drag -= 5;
+            mainCamera.GetComponent<CameraMovement>().enabled = false;
+            crashText.SetActive(true);
             crashed = true;
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (crashed == true)
+            {
+                crashSound.PlayOneShot(crashSoundClip, 5f);
+            }
+            else
+            {
+                crashText.SetActive(true);
+                crashSound.PlayOneShot(crashSoundClip, 5f);
+                this.GetComponent<Animator>().enabled = false;
+                this.GetComponent<Rigidbody2D>().drag -= 5;
+                mainCamera.GetComponent<CameraMovement>().enabled = false;
+                crashed = true;
+            }        
+        }
+    }
 }
