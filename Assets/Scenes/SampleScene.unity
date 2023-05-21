@@ -4512,7 +4512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelSprite: {fileID: 606939699}
-  fuelDecrease: 0.015
+  fuelDecrease: 0.4
   fuelText: {fileID: 181119699}
   fuelCurrent: 100
   plane: {fileID: 1558622613}
