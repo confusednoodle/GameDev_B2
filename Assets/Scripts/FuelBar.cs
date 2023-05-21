@@ -14,7 +14,7 @@ public class FuelBar : MonoBehaviour
     public float fuelCurrent = 100f;
     [SerializeField] Flying plane;
 
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Space) && plane.crashed == false)
         {
