@@ -135,6 +135,7 @@ public class Flying : MonoBehaviour
             this.GetComponent<Rigidbody2D>().drag -= 5;
             mainCamera.GetComponent<CameraMovement>().enabled = false;
             crashed = true;
+            maxRotationAngle = 360f;
             StartCoroutine(WaitForRestart());
         }
 
@@ -168,6 +169,7 @@ public class Flying : MonoBehaviour
                 this.GetComponent<Rigidbody2D>().drag -= 5;
                 mainCamera.GetComponent<CameraMovement>().enabled = false;
                 crashed = true;
+                maxRotationAngle = 360f;
                 StartCoroutine(WaitForRestart());
             }        
         }
