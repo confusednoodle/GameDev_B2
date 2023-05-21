@@ -57,7 +57,7 @@ public class Flying : MonoBehaviour
     {
         if (crashed == true && Input.GetKey(KeyCode.Space) && wait == false)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("MainMenu");
         }
 
         if (finished == true && Input.GetKey(KeyCode.Space) && wait == false)
