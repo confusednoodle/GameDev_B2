@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Obstacle
   - Item
+  - Ground
+  - Border
+  - Goal
   layers:
   - Default
   - TransparentFX
@@ -51,6 +54,9 @@ TagManager:
     locked: 0
   - name: Obstacles
     uniqueID: 2149218213
+    locked: 0
+  - name: Ground
+    uniqueID: 3712596005
     locked: 0
   - name: UI
     uniqueID: 397675347

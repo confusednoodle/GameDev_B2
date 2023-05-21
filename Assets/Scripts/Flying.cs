@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Flying : MonoBehaviour
 {
@@ -10,9 +13,11 @@ public class Flying : MonoBehaviour
     [SerializeField] float upperLimit;
     public float maxRotationAngle = 45f;
     private float currentRotation = 0f;
+    private float initialRotation = 0f;
 
     [SerializeField] AudioSource bgMusic;
     [SerializeField] AudioSource boostSound;
+    [SerializeField] AudioSource goalSound;
     private bool isPlaying = false;
 
     [SerializeField] SpriteRenderer playerSprite;
@@ -21,21 +26,47 @@ public class Flying : MonoBehaviour
     [SerializeField] AudioSource crashSound;
     [SerializeField] AudioClip crashSoundClip;
     public bool crashed = false;
+    public bool finished = false;
 
     //fuel bar
     float fuelDecrease = 0.015f;
     [SerializeField] FuelBar fuel;
     [SerializeField] AudioSource fuelEmpty;
 
+
+    //camera
+    [SerializeField] Camera mainCamera;
     public void Start()
     {
         StartCoroutine(WaitForMusic());
     }
 
+    //UI text
+    [SerializeField] GameObject crashText;
+    [SerializeField] GameObject goalText;
+    private bool wait = false;
+
+    //fuel item
+    public AudioSource itemCollected;
+    public AudioClip itemCollectedClip;
+
+    //border
+    private bool borderCollision = false;
+
     public void Update()
     {
+        if (crashed == true && Input.GetKey(KeyCode.Space) && wait == false)
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        if (finished == true && Input.GetKey(KeyCode.Space) && wait == false)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
         Vector2 pos = playerRigidbody.velocity;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && finished == false)
         {
             if (crashed)
             {
@@ -64,7 +95,7 @@ public class Flying : MonoBehaviour
                 playerRigidbody.velocity = pos;
             }
         }
-        else
+        else if (finished == false)
         {
             currentRotation += rotationSpeed * Time.deltaTime;
             currentRotation = Mathf.Clamp(currentRotation, 0f, maxRotationAngle);
@@ -86,7 +117,6 @@ public class Flying : MonoBehaviour
             isPlaying = false;
         }
 
-
     }
 
     private IEnumerator WaitForMusic()
@@ -98,13 +128,76 @@ public class Flying : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.tag == "Obstacle" && crashed == false)
         {
             crashSound.PlayOneShot(crashSoundClip, 5f);
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<Rigidbody2D>().drag -= 5;
+            mainCamera.GetComponent<CameraMovement>().enabled = false;
             crashed = true;
+            maxRotationAngle = 360f;
+            StartCoroutine(WaitForRestart());
         }
+
+        if (collision.gameObject.tag == "Item" && crashed == false)
+        {
+            itemCollected.PlayOneShot(itemCollectedClip, 0.5f);
+        }
+
+        if (collision.gameObject.tag == "Goal" && crashed == false)
+        {
+            finished = true;
+            this.GetComponent<Animator>().enabled = false;
+            transform.rotation = Quaternion.Euler(0f, 0f, initialRotation);
+            goalSound.Play();
+            StartCoroutine(WaitForMenu());
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (crashed == true)
+            {
+                crashSound.PlayOneShot(crashSoundClip, 5f);
+            }
+            else
+            {
+                crashSound.PlayOneShot(crashSoundClip, 5f);
+                this.GetComponent<Animator>().enabled = false;
+                this.GetComponent<Rigidbody2D>().drag -= 5;
+                mainCamera.GetComponent<CameraMovement>().enabled = false;
+                crashed = true;
+                maxRotationAngle = 360f;
+                StartCoroutine(WaitForRestart());
+            }        
+        }
+
+        if (collision.gameObject.tag == "Border")
+        {
+            borderCollision = true;
+            currentRotation += rotationSpeed * Time.deltaTime;
+            currentRotation = Mathf.Clamp(currentRotation, 0f, maxRotationAngle);
+            transform.rotation = Quaternion.Euler(0f, 0f, -currentRotation);
+        }
+
+    }
+
+    private IEnumerator WaitForRestart()
+    {
+        wait = true;
+        yield return new WaitForSeconds(0.5f);
+        crashText.SetActive(true);
+        wait = false;
+    }
+
+    private IEnumerator WaitForMenu()
+    {
+        wait = true;
+        yield return new WaitForSeconds(2f);
+        goalText.SetActive(true);
+        wait = false;
     }
 
 }

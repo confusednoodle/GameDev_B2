@@ -180,10 +180,10 @@ TextureImporter:
       name: Bird 1 Pink_0
       rect:
         serializedVersion: 2
-        x: 161
-        y: 1992
-        width: 480
-        height: 370
+        x: 0
+        y: 1878
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: Bird 1 Pink_1
       rect:
         serializedVersion: 2
-        x: 960
-        y: 1995
-        width: 481
-        height: 369
+        x: 800
+        y: 1878
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,10 +222,10 @@ TextureImporter:
       name: Bird 1 Pink_2
       rect:
         serializedVersion: 2
-        x: 1760
-        y: 2005
-        width: 481
-        height: 365
+        x: 1600
+        y: 1878
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,10 +243,10 @@ TextureImporter:
       name: Bird 1 Pink_3
       rect:
         serializedVersion: 2
-        x: 2560
-        y: 2015
-        width: 481
-        height: 361
+        x: 2400
+        y: 1878
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,10 +264,10 @@ TextureImporter:
       name: Bird 1 Pink_4
       rect:
         serializedVersion: 2
-        x: 3359
-        y: 2013
-        width: 482
-        height: 365
+        x: 3200
+        y: 1878
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,10 +285,10 @@ TextureImporter:
       name: Bird 1 Pink_5
       rect:
         serializedVersion: 2
-        x: 159
-        y: 1390
-        width: 482
-        height: 361
+        x: 0
+        y: 1252
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,10 +306,10 @@ TextureImporter:
       name: Bird 1 Pink_6
       rect:
         serializedVersion: 2
-        x: 960
-        y: 1383
-        width: 481
-        height: 364
+        x: 800
+        y: 1252
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -327,10 +327,10 @@ TextureImporter:
       name: Bird 1 Pink_7
       rect:
         serializedVersion: 2
-        x: 1760
-        y: 1374
-        width: 481
-        height: 367
+        x: 1600
+        y: 1252
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -348,10 +348,10 @@ TextureImporter:
       name: Bird 1 Pink_8
       rect:
         serializedVersion: 2
-        x: 2561
-        y: 1368
-        width: 480
-        height: 369
+        x: 2400
+        y: 1252
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -369,10 +369,10 @@ TextureImporter:
       name: Bird 1 Pink_9
       rect:
         serializedVersion: 2
-        x: 3361
-        y: 1366
-        width: 480
-        height: 370
+        x: 3200
+        y: 1252
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -390,10 +390,10 @@ TextureImporter:
       name: Bird 1 Pink_10
       rect:
         serializedVersion: 2
-        x: 161
-        y: 742
-        width: 480
-        height: 369
+        x: 0
+        y: 626
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -411,10 +411,10 @@ TextureImporter:
       name: Bird 1 Pink_11
       rect:
         serializedVersion: 2
-        x: 960
-        y: 748
-        width: 481
-        height: 367
+        x: 800
+        y: 626
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -432,10 +432,10 @@ TextureImporter:
       name: Bird 1 Pink_12
       rect:
         serializedVersion: 2
-        x: 1760
-        y: 758
-        width: 481
-        height: 363
+        x: 1600
+        y: 626
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -453,10 +453,10 @@ TextureImporter:
       name: Bird 1 Pink_13
       rect:
         serializedVersion: 2
-        x: 2559
-        y: 764
-        width: 482
-        height: 361
+        x: 2400
+        y: 626
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -474,10 +474,10 @@ TextureImporter:
       name: Bird 1 Pink_14
       rect:
         serializedVersion: 2
-        x: 3359
-        y: 761
-        width: 482
-        height: 365
+        x: 3200
+        y: 626
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -495,10 +495,10 @@ TextureImporter:
       name: Bird 1 Pink_15
       rect:
         serializedVersion: 2
-        x: 159
-        y: 138
-        width: 482
-        height: 361
+        x: 0
+        y: 0
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -516,10 +516,10 @@ TextureImporter:
       name: Bird 1 Pink_16
       rect:
         serializedVersion: 2
-        x: 960
-        y: 131
-        width: 481
-        height: 364
+        x: 800
+        y: 0
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -537,10 +537,10 @@ TextureImporter:
       name: Bird 1 Pink_17
       rect:
         serializedVersion: 2
-        x: 1760
-        y: 122
-        width: 481
-        height: 367
+        x: 1600
+        y: 0
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -558,10 +558,10 @@ TextureImporter:
       name: Bird 1 Pink_18
       rect:
         serializedVersion: 2
-        x: 2561
-        y: 116
-        width: 480
-        height: 369
+        x: 2400
+        y: 0
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -579,10 +579,10 @@ TextureImporter:
       name: Bird 1 Pink_19
       rect:
         serializedVersion: 2
-        x: 3361
-        y: 114
-        width: 480
-        height: 370
+        x: 3200
+        y: 0
+        width: 800
+        height: 626
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
