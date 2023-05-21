@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirtBlockHorizontal : MonoBehaviour
+public class BatDiagonal : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     public float distance = 5f; // Distance to move
@@ -24,9 +24,10 @@ public class DirtBlockHorizontal : MonoBehaviour
     {
         // Calculate the next position based on the movement direction
         float nextPositionX = transform.position.x + (isMovingRight ? speed : -speed) * Time.deltaTime;
+        float nextPositionY = transform.position.y + (isMovingRight ? speed : -speed) * Time.deltaTime;
 
         // Move the sprite towards the next position
-        transform.position = new Vector3(nextPositionX, transform.position.y, transform.position.z);
+        transform.position = new Vector3(nextPositionX, nextPositionY, transform.position.z);
 
         // Check if the sprite has reached the target position
         if ((isMovingRight && nextPositionX >= targetPositionX) || (!isMovingRight && nextPositionX <= initialPosition.x))
